@@ -3,12 +3,12 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class UserEntity{
-    @PrimaryGeneratedColumn()
-    id:number;
+    @PrimaryGeneratedColumn('increment')
+    Id:number;
 
     @Column()
-    name:string;
+    Name:string;
 
     @Column()
-    age:number;
+    Age:number;
 }

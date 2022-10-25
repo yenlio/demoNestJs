@@ -14,31 +14,34 @@ export class UserController {
     }
 
     @Get(':id')
-    getById(@Param() id:number){
-          const response=this.userService.getbyId(id)
+    getById(@Param() params){
+          const response=this.userService.getbyId(params.id)
           return response
     }
    
 
     @Post()
-    postUser(@Body() userDTO: UserEntity) {
-        const user = this.userService.create(userDTO);
-        return {"user":user}
+   async postUser(@Body() userDTO: UserEntity) {
+       
+        const user =await this.userService.create(userDTO);
+        return user
     }
 
     @Put(":id")
     updateUser(
-        @Param() id: number,
+        @Param() params,
         @Body() userDTO: UserEntity
     ) {
-      const response= this.userService.update(id,userDTO)
+      const response= this.userService.update(params.id,userDTO)
       return response
     }
 
 
-    @Delete()
-    deleteUser(@Param() id:number){
-       const res= this.userService.deleteUser(id)
+    @Delete(':id')
+    deleteUser(@Param() params){
+        console.log(params.id," id");
+        
+       const res= this.userService.deleteUser(params.id)
        return res
     }
 }

@@ -11,12 +11,12 @@ import { UserModule } from './user/user.module';
       type:'oracle',
       host:'localhost',
       port:1521,
-      username:'system',
-      database:'demoNestJs',
-      password:'0112199901121999',
+      username:'yennh',
+      database:'yennh',
+      password:'123456',
       sid:'orcl',
       entities:[UserEntity],
-      synchronize:false
+      synchronize:true
     }),
     UserModule],  
   controllers: [AppController],

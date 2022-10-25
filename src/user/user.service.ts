@@ -9,29 +9,39 @@ export class userService {
         @InjectRepository(UserEntity)
         private userRepo: Repository<UserEntity>
     ) { }
-
     async getAll() {
-
         let res = await this.userRepo.find()
-        console.log(res," res get");
+        console.log(" res gettt");
         return res
     }
-
-    async getbyId(id:number){
-        return this.userRepo.findOne({
-            where:{id}
+    async getbyId(Id:number){
+        let res=await this.userRepo.findOne({
+            where:{Id}
         })
-    }
-    async create(user:UserEntity){
-        return this.userRepo.create(user)
-    }
-    async update(id:number,user:UserEntity){
-        let res= await this.userRepo.update(id,user)
         return res
     }
-    async deleteUser(id:number){
-        await this.userRepo.delete(id)
-        return(" thanh cong");
+    async create(user:UserEntity):Promise <UserEntity>{
+        try {
+            const res= await this.userRepo.save({Id:user.Id,Name:user.Name,Age:user.Age});  
+            return(res)
+        } catch (error) {
+            return error;
+        }  
+    }
+    async update(Id:number,user:UserEntity){
+        console.log(Id, user," du lieu");
+        
+        let res= await this.userRepo.update(Id,user)
+        return res
+    }
+    async deleteUser(id:number):Promise<string>{
+       try {
+           console.log(id," id in serviece"); 
+       await this.userRepo.delete(id)
+       return("thanh cong")
+       } catch (error) {
+        return error;
+       }
     }
 
 
