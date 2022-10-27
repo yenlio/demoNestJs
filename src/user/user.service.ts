@@ -14,15 +14,18 @@ export class userService {
         console.log(" res gettt");
         return res
     }
-    async getbyId(Id:number){
-        let res=await this.userRepo.findOne({
-            where:{Id}
-        })
-        return res
-    }
+    // async getbyId(Id:number){
+    //     let res=await this.userRepo.findOne({
+    //         where:{Id}
+    //     })
+    //     return res
+    // }
     async create(user:UserEntity):Promise <UserEntity>{
         try {
-            const res= await this.userRepo.save({Id:user.Id,Name:user.Name,Age:user.Age});  
+            console.log(user," res");
+            const res= await this.userRepo.save({Id:user.Id,Name:user.Name,Age:user.Age,Password:user.Password});  
+            console.log(res," res");
+            
             return(res)
         } catch (error) {
             return error;
@@ -44,11 +47,14 @@ export class userService {
        }
     }
 
-
-
-
-
-
+    async getbyName(Name:string){
+        console.log(Name," name");
+        
+        let res=await this.userRepo.findOne({
+            where:{Name}
+        })
+        return res
+    }
 
 
 
